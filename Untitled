@@ -1,0 +1,39 @@
+import streamlit as st
+import pandas as pd
+
+st.set_page_config(page_title="Website Dashboard", layout="wide")
+
+st.title("🌐 Website Dashboard")
+
+# Read Excel
+df = pd.read_excel("websites.xlsx")
+
+# Number of columns
+num_columns = 4
+
+rows = [df[i:i+num_columns] for i in range(0, len(df), num_columns)]
+
+for row in rows:
+    cols = st.columns(num_columns)
+
+    for col, (_, website) in zip(cols, row.iterrows()):
+        with col:
+            st.markdown(
+                f"""
+                <a href="{website['URL']}" target="_blank" style="text-decoration:none;">
+                    <div style="
+                        border:1px solid #ddd;
+                        padding:30px;
+                        border-radius:12px;
+                        text-align:center;
+                        background-color:#f9f9f9;
+                        cursor:pointer;
+                        box-shadow:2px 2px 8px rgba(0,0,0,0.1);
+                    ">
+                        <h3>{website['Name']}</h3>
+                        <p>Open Website</p>
+                    </div>
+                </a>
+                """,
+                unsafe_allow_html=True
+            )
