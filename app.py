@@ -83,7 +83,7 @@ st.markdown(
 )
 
 # LOAD EXCEL
-df = pd.read_excel("websites.xlsx")
+df = pd.read_excel("websites.xlsx", engine="openpyxl")
 
 # SEARCH
 search = st.text_input("🔍 Search Tool")
